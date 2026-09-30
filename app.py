@@ -4,10 +4,12 @@ import models
 import fitz
 import docx
 import json
+import os 
 from ai import analyze_resume
 
+
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
 
 Base.metadata.create_all(bind=engine)
 
