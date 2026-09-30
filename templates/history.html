@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Your History</h2>
+{% for r in reports %}
+<form method="POST" action="/history/delete/{{ r.id }}" onsubmit="return confirm('I want to Delete it ')">
+    <button type="submit">delete</button>
+</form>
+
+<div class="card">
+    <p><strong>Resume Preview:</strong></p>
+    <p>{{ r.resume[:150] }}</p>
+    <hr>
+
+    <h3>Skills</h3>
+    <ul>
+        {% for s in r.result.get("skills", []) %}
+        <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Missing Skills</h3>
+    <ul>
+        {% for s in r.result.get("missing_skills", []) %}
+        <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Roadmap</h3>
+    <ul>
+        {% for s in r.result.get("roadmap", []) %}
+        <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Interview Questions List</h3>
+    <ul>
+        {% for s in r.result.get("interview_questions", []) %}
+        <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock %}
+
